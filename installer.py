@@ -102,7 +102,7 @@ class Installer:
     def install_caprover(self):
         print("Installing Caprover")
         #docker run -p 80:80 -p 443:443 -p 3000:3000 -e ACCEPTED_TERMS=true -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover
-        os.system("docker run -d -p 80:80 -p 443:443 -p 3000:3000 -e ACCEPTED_TERMS=true -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover")
+        os.system("sudo docker run -d -p 80:80 -p 443:443 -p 3000:3000 -e ACCEPTED_TERMS=true -v /var/run/docker.sock:/var/run/docker.sock -v /captain:/captain caprover/caprover")
         
         if self.check_caprover():
             print("Caprover Installed")
@@ -133,6 +133,21 @@ class Installer:
             self.install_npm()
         os.system("sudo npm install -g caprover")
         print("Caprover CLI Installed")
+        
+    def caprover_serversetup(self):
+        print("Setting up Caprover Server")
+        os.system("caprover serversetup")
+        print("Caprover Server Setup")
+        
+    def caprover_login(self):
+        print("Logging into Caprover")
+        os.system("caprover login")
+        print("Caprover Logged In")
+        
+    def caprover_appcreate(self):
+        print("Creating Caprover App")
+        os.system("caprover appcreate")
+        print("Caprover App Created")
             
 if __name__ == "__main__":
     params = sys.argv
